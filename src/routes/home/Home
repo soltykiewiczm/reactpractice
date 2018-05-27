@@ -1,0 +1,44 @@
+import React, { PureComponent, Fragment } from 'react';
+import WhatComesOut from '../../components/WhatComesOut/WhatComesOut';
+import UserList from '../../components/UserList/UserList';
+import '../../App.css';
+
+class Home extends PureComponent {
+    state = {
+        userValue: ' ',
+        userList: [],
+    };
+    componentDidUpdate() {
+        console.log(this.state);
+    }
+    addUser = (event) => {this.setState({userList: [...this.state.userList, this.state.userValue],
+        userValue: ' '
+    })};
+    userOnChange = (event) => {
+        this.setState({
+            userValue: event.target.value
+        });
+    };
+
+    render() {
+        return (
+            <Fragment>
+                <input
+                    className="input"
+                    value={this.state.userValue}
+                    placeholder={'User name'}
+                    onChange={this.userOnChange}
+                />
+                <button className="button" onClick={this.addUser}>Add User</button>
+                <WhatComesOut inputValue={
+                    this.state.userValue
+                }
+                />
+                <UserList userList={this.state.userList}/>
+            </Fragment>
+
+        );
+    }
+}
+
+export default Home;
